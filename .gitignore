@@ -1,0 +1,25 @@
+# 1. Datasets: too large for GitHub (up to 339 MB). Download links are in README.md
+*.csv
+!result.csv
+*.zip
+
+# 2. Private working notes and local tool settings
+CLAUDE.md
+.claude/
+.playwright-mcp/
+
+# 3. Course materials and third-party papers (not ours to redistribute)
+Documentations/
+A_Lightweight_Two-Stage_Intrusion_Detection_Framew.pdf
+
+# 4. Personal scratch work
+scripts/script1.ipynb
+
+# 5. Editor, Office and Python temporary files
+~$*
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.vscode/
+Thumbs.db
+desktop.ini

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-label="Footer: thanks for visiting">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1220" stop-opacity="0"/>
+      <stop offset="1" stop-color="#1c1410"/>
+    </linearGradient>
+    <linearGradient id="txt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9ca3af">
+        <animate attributeName="stop-color" values="#9ca3af;#3b82f6;#f59e0b;#9ca3af" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="1" stop-color="#3b82f6">
+        <animate attributeName="stop-color" values="#3b82f6;#f59e0b;#9ca3af;#3b82f6" dur="8s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <g id="leaf">
+      <path d="M0,-12 C7,-9 11,-2 9,5 C7,10 3,12 0,14 C-3,12 -7,10 -9,5 C-11,-2 -7,-9 0,-12 Z"/>
+      <path d="M0,-10 L0,16" stroke="#3a1d0a" stroke-width="1" stroke-opacity="0.5" fill="none"/>
+    </g>
+    <style>
+      .f { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+      .fall { animation: fall linear infinite; }
+      .sway { animation: sway ease-in-out infinite alternate; }
+      .spin { animation: spin linear infinite; transform-box: fill-box; transform-origin: center; }
+      @keyframes fall { from { transform: translateY(-30px); } to { transform: translateY(170px); } }
+      @keyframes sway { from { transform: translateX(-18px); } to { transform: translateX(18px); } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .pile { animation: glow 5s ease-in-out infinite alternate; }
+      @keyframes glow { from { opacity: 0.55; } to { opacity: 0.9; } }
+    </style>
+  </defs>
+  <rect width="1200" height="190" fill="url(#bg)" rx="18"/>
+
+  <!-- a small pile of leaves on the ground -->
+  <g class="pile">
+    <use xlink:href="#leaf" fill="#b45309" transform="translate(180,176) rotate(70)"/>
+    <use xlink:href="#leaf" fill="#d97706" transform="translate(205,180) rotate(-40)"/>
+    <use xlink:href="#leaf" fill="#ea580c" transform="translate(990,178) rotate(20)"/>
+    <use xlink:href="#leaf" fill="#ca8a04" transform="translate(1015,174) rotate(110)"/>
+    <use xlink:href="#leaf" fill="#dc2626" transform="translate(600,182) rotate(-80) scale(0.8)"/>
+  </g>
+
+  <g class="f" text-anchor="middle">
+    <text x="600" y="92" font-size="30" font-weight="800" fill="url(#txt)">Thanks for visiting</text>
+    <text x="600" y="124" font-size="15" fill="#94a3b8">Built with Python, scikit-learn and Jupyter · Machine Learning Fundamentals · Autumn 2026</text>
+  </g>
+
+  <g class="fall" style="animation-duration:9s;animation-delay:-1s"><g class="sway" style="animation-duration:2.5s"><g class="spin" style="animation-duration:6s"><use xlink:href="#leaf" x="110" y="0" fill="#d97706"/></g></g></g>
+  <g class="fall" style="animation-duration:11s;animation-delay:-6s"><g class="sway" style="animation-duration:3s"><g class="spin" style="animation-duration:7s"><use xlink:href="#leaf" x="330" y="0" fill="#ea580c" transform="scale(0.85)"/></g></g></g>
+  <g class="fall" style="animation-duration:10s;animation-delay:-3s"><g class="sway" style="animation-duration:2.2s"><g class="spin" style="animation-duration:5s"><use xlink:href="#leaf" x="520" y="0" fill="#ca8a04"/></g></g></g>
+  <g class="fall" style="animation-duration:12s;animation-delay:-8s"><g class="sway" style="animation-duration:3.4s"><g class="spin" style="animation-duration:8s"><use xlink:href="#leaf" x="760" y="0" fill="#b45309" transform="scale(1.1)"/></g></g></g>
+  <g class="fall" style="animation-duration:9.5s;animation-delay:-5s"><g class="sway" style="animation-duration:2.7s"><g class="spin" style="animation-duration:6.5s"><use xlink:href="#leaf" x="930" y="0" fill="#dc2626" transform="scale(0.8)"/></g></g></g>
+  <g class="fall" style="animation-duration:13s;animation-delay:-10s"><g class="sway" style="animation-duration:3.2s"><g class="spin" style="animation-duration:9s"><use xlink:href="#leaf" x="1110" y="0" fill="#f59e0b"/></g></g></g>
+</svg>

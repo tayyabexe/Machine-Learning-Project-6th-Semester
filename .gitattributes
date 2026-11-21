@@ -1,0 +1,11 @@
+# Normalise line endings for text files
+* text=auto
+
+# Binary files
+*.png binary
+*.xlsx binary
+*.pdf binary
+
+# Count notebooks as Python in GitHub's language bar, and treat SVG banners as documentation
+*.ipynb linguist-language=Python
+assets/*.svg linguist-documentation
