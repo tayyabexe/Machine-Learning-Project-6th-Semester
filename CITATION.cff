@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "IoT / IIoT Intrusion Detection with Decision Trees and ANN on TON_IoT, Edge-IIoTset and X-IIoTID"
+type: software
+authors:
+  - given-names: Tayyab
+    family-names: Abdullah
+repository-code: "https://github.com/tayyabexe/Machine-Learning-Project-6th-Semester"
+date-released: 2026-11-22
+keywords:
+  - machine learning
+  - intrusion detection
+  - IoT security
+  - decision tree
+  - neural network
+  - scikit-learn

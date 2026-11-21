@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="568" viewBox="0 0 1200 568" role="img" aria-label="Test accuracy, Decision Tree vs ANN, for 7 targets. Values: TON_IoT · label: DT 0.9981, ANN 0.9923; TON_IoT · type: DT 0.9766, ANN 0.8232; Edge-IIoTset · Attack_label: DT 0.9623, ANN 0.9098; Edge-IIoTset · Attack_type: DT 0.8573, ANN 0.6645; X-IIoTID · class3: DT 0.9958, ANN 0.9899; X-IIoTID · class2: DT 0.9953, ANN 0.9887; X-IIoTID · class1: DT 0.9953, ANN 0.9886">
+<style>.f{font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif}.grow{animation:grow 1.3s cubic-bezier(.2,.8,.2,1) both;transform-box:fill-box;transform-origin:left center}@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}.fade{animation:fade .6s ease-out both}@keyframes fade{from{opacity:0}to{opacity:1}}</style>
+<rect width="1200" height="568" rx="18" fill="#0f172a"/>
+<rect x="0.5" y="0.5" width="1199" height="567" rx="17.5" fill="none" stroke="#334155"/>
+<g class="f"><text x="40" y="48" font-size="22" font-weight="700" fill="#e2e8f0">Test accuracy: Decision Tree vs ANN</text>
+<text x="40" y="74" font-size="14" fill="#94a3b8">20% test set, used once · multiclass targets also scored with macro-F1 in the table below</text>
+<rect x="900" y="38" width="14" height="14" rx="3" fill="#3b82f6"/><text x="922" y="50" font-size="14" fill="#e2e8f0">Decision Tree</text>
+<rect x="1040" y="38" width="14" height="14" rx="3" fill="#d97706"/><text x="1062" y="50" font-size="14" fill="#e2e8f0">ANN (MLP)</text>
+<line x1="300.0" y1="98" x2="300.0" y2="510" stroke="#1e293b" stroke-width="1"/>
+<text x="300.0" y="532" font-size="12" fill="#64748b" text-anchor="middle">0.00</text>
+<line x1="490.0" y1="98" x2="490.0" y2="510" stroke="#1e293b" stroke-width="1"/>
+<text x="490.0" y="532" font-size="12" fill="#64748b" text-anchor="middle">0.25</text>
+<line x1="680.0" y1="98" x2="680.0" y2="510" stroke="#1e293b" stroke-width="1"/>
+<text x="680.0" y="532" font-size="12" fill="#64748b" text-anchor="middle">0.50</text>
+<line x1="870.0" y1="98" x2="870.0" y2="510" stroke="#1e293b" stroke-width="1"/>
+<text x="870.0" y="532" font-size="12" fill="#64748b" text-anchor="middle">0.75</text>
+<line x1="1060.0" y1="98" x2="1060.0" y2="510" stroke="#1e293b" stroke-width="1"/>
+<text x="1060.0" y="532" font-size="12" fill="#64748b" text-anchor="middle">1.00</text>
+<text class="fade" x="284" y="128" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.0s">TON_IoT · label</text>
+<text class="fade" x="284" y="145" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.0s">2 classes</text>
+<path class="grow" d="M300,112 h754.6 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-754.6 z" fill="#3b82f6" style="animation-delay:0.00s"/>
+<text class="fade" x="1066.6" y="125.5" font-size="12" fill="#94a3b8" style="animation-delay:1.00s">0.9981</text>
+<path class="grow" d="M300,132 h750.1 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-750.1 z" fill="#d97706" style="animation-delay:0.10s"/>
+<text class="fade" x="1062.1" y="145.5" font-size="12" fill="#94a3b8" style="animation-delay:1.10s">0.9923</text>
+<text class="fade" x="284" y="186" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.1s">TON_IoT · type</text>
+<text class="fade" x="284" y="203" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.1s">10 classes</text>
+<path class="grow" d="M300,170 h738.2 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-738.2 z" fill="#3b82f6" style="animation-delay:0.15s"/>
+<text class="fade" x="1050.2" y="183.5" font-size="12" fill="#94a3b8" style="animation-delay:1.15s">0.9766</text>
+<path class="grow" d="M300,190 h621.6 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-621.6 z" fill="#d97706" style="animation-delay:0.25s"/>
+<text class="fade" x="933.6" y="203.5" font-size="12" fill="#94a3b8" style="animation-delay:1.25s">0.8232</text>
+<text class="fade" x="284" y="244" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.2s">Edge-IIoTset · Attack_label</text>
+<text class="fade" x="284" y="261" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.2s">2 classes</text>
+<path class="grow" d="M300,228 h727.3 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-727.3 z" fill="#3b82f6" style="animation-delay:0.30s"/>
+<text class="fade" x="1039.3" y="241.5" font-size="12" fill="#94a3b8" style="animation-delay:1.30s">0.9623</text>
+<path class="grow" d="M300,248 h687.4 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-687.4 z" fill="#d97706" style="animation-delay:0.40s"/>
+<text class="fade" x="999.4" y="261.5" font-size="12" fill="#94a3b8" style="animation-delay:1.40s">0.9098</text>
+<text class="fade" x="284" y="302" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.3s">Edge-IIoTset · Attack_type</text>
+<text class="fade" x="284" y="319" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.3s">15 classes</text>
+<path class="grow" d="M300,286 h647.5 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-647.5 z" fill="#3b82f6" style="animation-delay:0.45s"/>
+<text class="fade" x="959.5" y="299.5" font-size="12" fill="#94a3b8" style="animation-delay:1.45s">0.8573</text>
+<path class="grow" d="M300,306 h501.0 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-501.0 z" fill="#d97706" style="animation-delay:0.55s"/>
+<text class="fade" x="813.0" y="319.5" font-size="12" fill="#94a3b8" style="animation-delay:1.55s">0.6645</text>
+<text class="fade" x="284" y="360" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.4s">X-IIoTID · class3</text>
+<text class="fade" x="284" y="377" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.4s">2 classes</text>
+<path class="grow" d="M300,344 h752.8 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-752.8 z" fill="#3b82f6" style="animation-delay:0.60s"/>
+<text class="fade" x="1064.8" y="357.5" font-size="12" fill="#94a3b8" style="animation-delay:1.60s">0.9958</text>
+<path class="grow" d="M300,364 h748.3 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-748.3 z" fill="#d97706" style="animation-delay:0.70s"/>
+<text class="fade" x="1060.3" y="377.5" font-size="12" fill="#94a3b8" style="animation-delay:1.70s">0.9899</text>
+<text class="fade" x="284" y="418" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.5s">X-IIoTID · class2</text>
+<text class="fade" x="284" y="435" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.5s">10 classes</text>
+<path class="grow" d="M300,402 h752.4 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-752.4 z" fill="#3b82f6" style="animation-delay:0.75s"/>
+<text class="fade" x="1064.4" y="415.5" font-size="12" fill="#94a3b8" style="animation-delay:1.75s">0.9953</text>
+<path class="grow" d="M300,422 h747.4 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-747.4 z" fill="#d97706" style="animation-delay:0.85s"/>
+<text class="fade" x="1059.4" y="435.5" font-size="12" fill="#94a3b8" style="animation-delay:1.85s">0.9887</text>
+<text class="fade" x="284" y="476" font-size="14" font-weight="600" fill="#e2e8f0" text-anchor="end" style="animation-delay:0.6s">X-IIoTID · class1</text>
+<text class="fade" x="284" y="493" font-size="12" fill="#64748b" text-anchor="end" style="animation-delay:0.6s">19 classes</text>
+<path class="grow" d="M300,460 h752.4 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-752.4 z" fill="#3b82f6" style="animation-delay:0.90s"/>
+<text class="fade" x="1064.4" y="473.5" font-size="12" fill="#94a3b8" style="animation-delay:1.90s">0.9953</text>
+<path class="grow" d="M300,480 h747.3 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-747.3 z" fill="#d97706" style="animation-delay:1.00s"/>
+<text class="fade" x="1059.3" y="493.5" font-size="12" fill="#94a3b8" style="animation-delay:2.00s">0.9886</text>
+<text x="680" y="554" font-size="12" fill="#64748b" text-anchor="middle">Accuracy (0 to 1)</text></g></svg>
