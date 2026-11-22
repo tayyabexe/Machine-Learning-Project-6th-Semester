@@ -76,7 +76,7 @@ Multiclass metrics are **macro-averaged**.
 | Edge-IIoT Attack_label / Attack_type | 11 s / 12 s | 0.0018 / 0.0017 ms per sample |
 | X-IIoTID class3 / class2 / class1 | 116 s / 131 s / 141 s | 0.0026 / 0.0032 / 0.0028 ms per sample |
 
-The Decision Tree trains faster (about 1 s on TON_IoT and Edge-IIoT, 30-46 s on X-IIoTID) and predicts faster (0.0003 to 0.0011 ms per sample). The X-IIoTID ANN times were measured on the second laptop, so they are only roughly comparable. Log-Loss, TP/TN/FP/FN and test time are in each notebook's results table and in `Results.xlsx`.
+The Decision Tree trains faster (0.6-1.1 s on TON_IoT and Edge-IIoT, 28-46 s on X-IIoTID) and predicts faster (0.0003 to 0.0012 ms per sample). The X-IIoTID ANN times were measured on the second laptop, so they are only roughly comparable. Log-Loss, TP/TN/FP/FN and test time are in each notebook's results table and in `Results.xlsx`.
 
 ---
 

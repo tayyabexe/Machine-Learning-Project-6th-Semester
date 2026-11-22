@@ -88,7 +88,7 @@ Multiclass metrics are **macro-averaged**.
 | X-IIoTID | class2 | 0.8884 | **0.9953** | 0.9791 | 0.9821 | 0.9806 | 0.9907 | 0.0007 | 0.9931 |
 | X-IIoTID | class1 | 0.8916 | **0.9953** | 0.9612 | 0.9656 | 0.9633 | 0.9826 | 0.0004 | 0.9932 |
 
-Inference latency is about **0.0003 to 0.0011 ms per sample** for all models. Log-Loss, TP/TN/FP/FN and training time are in each notebook's results table (Q19).
+Inference latency is about **0.0003 to 0.0012 ms per sample** for all models. Log-Loss, TP/TN/FP/FN and training time are in each notebook's results table (Q19).
 
 ---
 
@@ -104,7 +104,7 @@ Inference latency is about **0.0003 to 0.0011 ms per sample** for all models. Lo
 ## 7. Common setup (same for all models)
 
 - **Split:** 80% train / 20% test, stratified on the finest label (`type`, `Attack_type`, `class1`), so all models of a dataset test on the same rows.
-- **Validation:** stratified 5-fold on the 80% (64% train / 16% validation per fold). Used to check stability only; there was no tuning on the test set.
+- **Validation:** stratified 5-fold on the 80% (64% train / 16% validation per fold). Used to check stability only; no parameter search was run. The first Decision Tree setting (max_depth=5) was replaced by the papers' library defaults after its test results showed underfitting, so the test set influenced that one choice and was used more than once. The Decision Tree test scores may therefore be slightly optimistic.
 - **Dropped columns:** IPs, ports, timestamps, constant columns, and raw text/payload columns. TON_IoT also drops columns that are more than 95% empty.
 - **Encoding:** one-hot for categorical columns, fitted on the training set only; no scaling (trees don't need it).
 - **Duplicates:** kept for now (`DEDUPLICATE = False`). Duplicate share: TON_IoT 55%, Edge-IIoT 3.6%, X-IIoTID 14.6%.

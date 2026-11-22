@@ -3,7 +3,7 @@
 <rect width="1200" height="568" rx="18" fill="#0f172a"/>
 <rect x="0.5" y="0.5" width="1199" height="567" rx="17.5" fill="none" stroke="#334155"/>
 <g class="f"><text x="40" y="48" font-size="22" font-weight="700" fill="#e2e8f0">Test accuracy: Decision Tree vs ANN</text>
-<text x="40" y="74" font-size="14" fill="#94a3b8">20% test set, used once · multiclass targets also scored with macro-F1 in the table below</text>
+<text x="40" y="74" font-size="14" fill="#94a3b8">20% test set · multiclass targets also scored with macro-F1 in the table below</text>
 <rect x="900" y="38" width="14" height="14" rx="3" fill="#3b82f6"/><text x="922" y="50" font-size="14" fill="#e2e8f0">Decision Tree</text>
 <rect x="1040" y="38" width="14" height="14" rx="3" fill="#d97706"/><text x="1062" y="50" font-size="14" fill="#e2e8f0">ANN (MLP)</text>
 <line x1="300.0" y1="98" x2="300.0" y2="510" stroke="#1e293b" stroke-width="1"/>

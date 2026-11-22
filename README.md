@@ -67,7 +67,7 @@ Detect attacks in IoT / IIoT network traffic, and name the attack type, using tw
 | | Rule |
 |:-:|---|
 | 🔁 | Same split and same preprocessing for every model |
-| 🔒 | No tuning on the test set; it is used exactly once |
+| 🔒 | No parameter search. One exception to a blind test: the Decision Tree depth was changed after seeing test results (see Limitations) |
 | 🔢 | Every claim is backed by a number |
 | ⚖️ | Class imbalance is measured and discussed |
 | ⏱️ | Training and prediction time are reported |
@@ -102,7 +102,7 @@ One model is trained for **each target column**. Binary targets answer *"attack 
 
 All 14 notebooks follow the **same steps**, so the Decision Tree and the ANN are compared on exactly the same rows.
 
-<img src="assets/pipeline.svg" alt="Pipeline: load, clean, split, encode and scale, 5-fold validation, test once" width="100%"/>
+<img src="assets/pipeline.svg" alt="Pipeline: load, clean, split, encode and scale, 5-fold validation, test" width="100%"/>
 
 | Step | What happens | Why |
 |:-:|---|---|
@@ -110,8 +110,8 @@ All 14 notebooks follow the **same steps**, so the Decision Tree and the ANN are
 | **2** 🧹 | **Clean**: drop IP addresses, ports, timestamps, constant columns, columns > 95% empty (TON_IoT) and raw text payloads (Edge-IIoTset) | Identifiers let a model memorise one capture instead of learning attack behaviour |
 | **3** ✂️ | **Split** 80% train / 20% test, stratified on the finest label, `random_state = 42` | Every model of a dataset tests on the same rows |
 | **4** 🔤 | **Encode** with one-hot (plus frequency encoding for `dns_query`), learned from the training set only. **ANN only:** `StandardScaler` | No test information leaks into training |
-| **5** 🔁 | **Validate** with stratified 5-fold CV on the 80% (64% train / 16% validation per fold) | Checks **stability**; the settings come from papers, so nothing is tuned |
-| **6** 🎯 | **Test once** on the 20%: Accuracy, Precision, Recall, F1, ROC-AUC, Log-Loss, FPR, MCC, TP/TN/FP/FN, latency, plus graphs | A fair, single, final measurement |
+| **5** 🔁 | **Validate** with stratified 5-fold CV on the 80% (64% train / 16% validation per fold) | Checks **stability**; the settings come from papers; no parameter search was run |
+| **6** 🎯 | **Test** on the 20%: Accuracy, Precision, Recall, F1, ROC-AUC, Log-Loss, FPR, MCC, TP/TN/FP/FN, latency, plus graphs | The final measurement (for the Decision Tree depth, see Limitations) |
 
 <details>
 <summary><b>🔍 Show the same pipeline as a flowchart</b></summary>
@@ -128,7 +128,7 @@ flowchart LR
     F --> H[Stratified 5-fold CV]
     G --> H
     H --> I[Final model on 80%]
-    I --> J[Test once on 20%]
+    I --> J[Test on 20%]
 ```
 
 </details>
@@ -140,7 +140,7 @@ flowchart LR
 
 ## 🧠 4. Models and hyperparameters
 
-Hyperparameters are **taken from published papers for each dataset, not tuned on our data**. Full quotes and caveats are in [`HYPERPARAMETER_SOURCES.md`](HYPERPARAMETER_SOURCES.md).
+Hyperparameters are **taken from published papers for each dataset, without a parameter search**. The first Decision Tree setting (max_depth=5) was replaced by the papers' library defaults after its test results showed underfitting, so the test set influenced that one choice and was used more than once. The Decision Tree test scores may therefore be slightly optimistic. Full quotes and caveats are in [`HYPERPARAMETER_SOURCES.md`](HYPERPARAMETER_SOURCES.md).
 
 ### 🌳 4.1 Decision Tree (same settings for all 7 models)
 
@@ -173,7 +173,7 @@ All ANNs use ReLU activations, a sigmoid (binary) or softmax (multiclass) output
 
 <img src="assets/results_chart.svg" alt="Bar chart: test accuracy of Decision Tree vs ANN for all 7 targets" width="100%"/>
 
-Test set (20%), measured once. Multiclass F1 is **macro-averaged**. <img src="https://img.shields.io/badge/-DT-3B82F6?style=flat-square" alt="DT" height="16"/> = Decision Tree, <img src="https://img.shields.io/badge/-ANN-D97706?style=flat-square" alt="ANN" height="16"/> = ANN.
+Test set (20%). Multiclass F1 is **macro-averaged**. <img src="https://img.shields.io/badge/-DT-3B82F6?style=flat-square" alt="DT" height="16"/> = Decision Tree, <img src="https://img.shields.io/badge/-ANN-D97706?style=flat-square" alt="ANN" height="16"/> = ANN.
 
 | # | Dataset · target | Classes | DT accuracy | ANN accuracy | Gap | DT F1 | ANN F1 | Winner |
 |:-:|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -211,9 +211,9 @@ Lower Log-Loss is better. A full-depth tree outputs only 0 or 1 as probabilities
 
 | Dataset · target | DT train (s) | ANN train (s) | DT latency (ms/sample) | ANN latency (ms/sample) | Faster |
 |---|:-:|:-:|:-:|:-:|:-:|
-| 🌐 TON_IoT · `label` / `type` | 0.99 / 1.14 | 49.96 / 57.53 | 0.00034 / 0.00110 | 0.00221 / 0.00248 | ⚡ DT |
-| 🏭 Edge-IIoTset · `Attack_label` / `Attack_type` | 0.94 / 1.15 | 11.46 / 12.09 | 0.00106 / 0.00072 | 0.00179 / 0.00172 | ⚡ DT |
-| ⚙️ X-IIoTID · `class3` / `class2` / `class1` | 44.31 / 45.96 / 30.21 | 116.31 / 131.05 / 141.03 | 0.00109 / 0.00091 / 0.00095 | 0.00257 / 0.00320 / 0.00285 | ⚡ DT |
+| 🌐 TON_IoT · `label` / `type` | 1.14 / 0.58 | 49.96 / 57.53 | 0.00041 / 0.00032 | 0.00221 / 0.00248 | ⚡ DT |
+| 🏭 Edge-IIoTset · `Attack_label` / `Attack_type` | 0.66 / 0.97 | 11.46 / 12.09 | 0.00037 / 0.00045 | 0.00179 / 0.00172 | ⚡ DT |
+| ⚙️ X-IIoTID · `class3` / `class2` / `class1` | 38.62 / 28.05 / 45.74 | 116.31 / 131.05 / 141.03 | 0.00093 / 0.00043 / 0.00124 | 0.00257 / 0.00320 / 0.00285 | ⚡ DT |
 
 The X-IIoTID ANN times were measured on a second laptop, so compare them only roughly. Every metric is also in [`Results.xlsx`](Results.xlsx) and [`result.csv`](result.csv).
 
@@ -228,7 +228,7 @@ The X-IIoTID ANN times were measured on a second laptop, so compare them only ro
 | 3 | ⚙️ **X-IIoTID is the ANN's best dataset** | About 0.99 accuracy on all three targets, no over- or underfitting |
 | 4 | 📉 **Three ANNs underfit** | TON_IoT `type` and both Edge-IIoTset targets: train ≈ test accuracy, loss still falling at the last epoch |
 | 5 | ⚖️ **Imbalance hurts most on Edge-IIoTset** | The binary ANN flags 54% of normal traffic as attacks (FPR 0.54); 85% of rows are attacks |
-| 6 | ⚡ **Trees are much faster** | About 3 to 50× faster to train and 2 to 7× faster to predict |
+| 6 | ⚡ **Trees are much faster** | About 3 to 100× faster to train and 2 to 8× faster to predict |
 
 <img src="assets/divider.svg" alt="" width="100%"/>
 
@@ -380,7 +380,7 @@ Each notebook is written as **questions (Q1, Q2, ...) followed by short code cel
 
 | # | Limitation | Effect |
 |:-:|---|---|
-| 1 | 📄 **Paper settings, not tuned settings** | Better settings may exist; tuning would only be allowed on the validation folds |
+| 1 | 📄 **Paper settings, not tuned settings** | Better settings may exist; tuning would only be allowed on the validation folds. The first Decision Tree setting (max_depth=5) was replaced by the papers' library defaults after its test results showed underfitting, so the test set influenced that one choice and was used more than once. The Decision Tree test scores may therefore be slightly optimistic. |
 | 2 | 🧰 **The ANN is scikit-learn's `MLPClassifier`** | No RMSprop and no dropout, so the X-IIoTID optimizer was replaced by Adam |
 | 3 | 🧬 **Duplicates are kept** | TON_IoT is 55% duplicates; removing them would change the results |
 | 4 | 📚 **Not directly comparable with the papers** | The papers used other splits, SMOTE, feature selection or larger files |

@@ -27,7 +27,7 @@ This code was run end to end once before being written here. Your numbers should
 ```
 All data (211,043 rows)
 │
-├── 20% TEST set ........ locked away, used ONCE at the end (Q13 onward)
+├── 20% TEST set ........ kept for the end (Q13 onward)
 │
 └── 80% TRAINING set
     └── Stratified 5-fold (Q11). Each round:
@@ -35,7 +35,7 @@ All data (211,043 rows)
         └── 16% of all data → validate it
         (5 rounds, so every row is used for validation once)
 
-Final model (Q12) = train on the full 80%, then test once on the 20%.
+Final model (Q12) = train on the full 80%, then test on the 20%.
 ```
 
 Fixed decisions behind the code:
@@ -44,7 +44,7 @@ Fixed decisions behind the code:
 |---|---|---|
 | Split | 80/20, stratified on `type` | Same rows in both notebooks and all models, so the comparison is fair |
 | Validation | Stratified 5-fold on the 80% | Team decision. Shows how stable the model is |
-| Hyperparameters | gini, best, `max_depth=5`, `min_samples_split=5`, `min_samples_leaf=1`, `random_state=42` | Taken from papers (see `HYPERPARAMETER_SOURCES.md`), so nothing is tuned on our data |
+| Hyperparameters | gini, best, `max_depth=None`, `min_samples_split=2`, `min_samples_leaf=1`, `random_state=42` | Taken from papers (see `HYPERPARAMETER_SOURCES.md`), with no parameter search. The first Decision Tree setting (max_depth=5) was replaced by the papers' library defaults after its test results showed underfitting, so the test set influenced that one choice and was used more than once. The Decision Tree test scores may therefore be slightly optimistic. |
 | Dropped columns | `src_ip`, `dst_ip`, `src_port`, `dst_port`, plus columns more than 95% empty | Identifiers cause overfitting; empty columns carry no information |
 | Scaling | None | Trees compare values to thresholds, so scale doesn't matter (the ANN will need scaling) |
 | Latency | `predict()` time on the test set / number of test rows, in ms per sample | Same method for every model |
@@ -83,8 +83,8 @@ The path goes up three folders because the notebook lives in `scripts/Decision T
 **What it does:** keeps the tree's settings in one dictionary `HP`, so you never retype them. `DEDUPLICATE` is a switch for the duplicate-rows decision (see [section 6](#6-decisions-still-open)).
 
 ```python
-HP = dict(criterion="gini", splitter="best", max_depth=5,
-          min_samples_split=5, min_samples_leaf=1, random_state=RANDOM_STATE)
+HP = dict(criterion="gini", splitter="best", max_depth=None,
+          min_samples_split=2, min_samples_leaf=1, random_state=RANDOM_STATE)
 DEDUPLICATE = False
 ```
 
@@ -495,14 +495,14 @@ All figures are on the test set, with paper hyperparameters and `DEDUPLICATE = F
 
 | Target | Accuracy | Precision | Recall | F1 | ROC-AUC | Log-Loss | FPR | MCC |
 |---|---|---|---|---|---|---|---|---|
-| `label` | 0.9914 | 0.9926 | 0.9962 | 0.9944 | 0.9964 | 0.0354 | 0.0240 | 0.9762 |
-| `type` (macro) | 0.7959 | 0.7976 | 0.7221 | 0.7205 | 0.9663 | 0.5305 | 0.0232 | 0.7790 |
+| `label` | 0.9981 | 0.9986 | 0.9989 | 0.9988 | 0.9972 | 0.0668 | 0.0044 | 0.9948 |
+| `type` (macro) | 0.9766 | 0.9479 | 0.9516 | 0.9495 | 0.9800 | 0.5103 | 0.0026 | 0.9732 |
 
-- `label`: TP 32,087, TN 9,760, FP 240, FN 122, 42,209 test rows. Five-fold validation accuracy 0.9911 ± 0.0008. Training time about 0.5 s (varies by machine).
-- `type`: macro TP 3,359.5, TN 37,126.7, FP 861.4, FN 861.4.
-- With `DEDUPLICATE = True`: `label` accuracy 0.9802, `type` accuracy 0.8261 but macro-F1 only 0.5491.
+- `label`: TP 32,173, TN 9,956, FP 44, FN 36, 42,209 test rows. Five-fold validation accuracy 0.9977 ± 0.0003. Training time about 1.1 s (varies by machine).
+- `type`: macro TP 4,122.2, TN 37,889.4, FP 98.7, FN 98.7.
+- `DEDUPLICATE = True` has not been run with these settings.
 
-**Why `type` is low:** `max_depth=5` allows at most 32 leaves, which is too few for 10 classes. The tree underfits (train accuracy 0.794, test 0.796). In the per-class report, `ddos` recall is only 0.25 and `mitm` (209 test rows) is never predicted. `label` is fine at this depth. Treat this as a finding to discuss in the report, and decide whether to add a clearly labelled deeper-tree comparison.
+**Earlier setting:** the first version used `max_depth=5` and underfitted `type` (train accuracy 0.794, test 0.796). It was replaced after those results were seen, so state this in the report. The current tree's train / test accuracy for `type` is 0.9886 / 0.9766.
 
 ---
 
@@ -511,7 +511,6 @@ All figures are on the test set, with paper hyperparameters and `DEDUPLICATE = F
 | # | Question | Where it matters |
 |---|---|---|
 | O2 | Remove duplicates before the split? (55% of rows are duplicates; removing them shrinks `ransomware` to about 260 rows) | `DEDUPLICATE` switch in Q2. Ask teammates what they did |
-| O3 | Add a deeper-tree variant for `type`? | Report discussion; keep the paper-value result as the main one |
 | – | Test-row count in `Results.xlsx` | The KNN label row sums to 36,719 test rows, but ours is 42,209 (or 18,777 if deduplicated). Ask teammates how they split |
 
 Related files in the project root: `AUDIT_LOG.md` (decisions and figures), `HYPERPARAMETER_SOURCES.md` (paper sources for the report), `CLAUDE.md` (context for a new session).

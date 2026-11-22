@@ -56,7 +56,7 @@ M. Al-Hawawreh, E. Sitnikova, N. Aboutorab, "X-IIoTID: A Connectivity-Agnostic a
 
 ## Notes for the report
 - All three datasets end up with the unrestricted (full-depth) tree, because the dataset papers ([S1], [S4]) used library defaults. Say this plainly.
-- Values were taken from papers, not tuned on our data. The stratified 5-fold validation shows stability; the test set is used once.
+- Values were taken from papers, without a parameter search. The stratified 5-fold validation shows stability. The first Decision Tree setting (max_depth=5) was replaced by the papers' library defaults after its test results showed underfitting, so the test set influenced that one choice and was used more than once. The Decision Tree test scores may therefore be slightly optimistic.
 - Our split (80/20, then 5-fold on the 80%) differs from [S1] (70/30) and [S4] (5-fold CV on all data), so the numbers are not exactly comparable.
 - A full-depth tree can overfit. Compare train and test accuracy (Q15) and report it.
 
