@@ -4,7 +4,7 @@
 
 # 📊 Graphs
 
-**49 PNG files: 4 per Decision Tree model and 3 per ANN model, taken straight from the executed notebooks.**
+**75 PNG files: 49 taken straight from the executed notebooks, plus 26 versions made for the group report.**
 
 </div>
 
@@ -28,6 +28,17 @@ Graphs/
 | 3 | `03_feature_importance.png` | ✅ | ➖ | Top 10 features the tree relies on |
 | 4 | `04_tree_top_levels.png` | ✅ | ➖ | The first 3 levels of the tree |
 | 3 | `03_loss_curve.png` | ➖ | ✅ | Training loss per epoch (still falling at the end = underfitting) |
+
+**Report versions**
+
+| File | Model | What it is |
+|---|---|---|
+| `05_report_confusion_matrix.png`, `06_report_roc_curve.png` | DT (all 7) | Larger versions redrawn from a re-run that reproduced the saved results exactly |
+| `04_report_confusion_matrix.png`, `05_report_roc_curve.png` | ANN TON_IoT and Edge-IIoT | Larger versions redrawn from a re-run that reproduced the saved results exactly |
+| `04_report_confusion_matrix.png`, `05_report_roc_curve.png` | ANN `class3` | Made from the saved results and figure of the reported model |
+| `05_report_roc_curve_rerun.png` | ANN `class2`, `class1` | **From a re-run on another laptop that did not reproduce the reported model exactly.** Macro AUC 0.999716 and 0.999609, against 0.999606 and 0.999601 in the results table |
+
+For ANN `class2` and `class1`, the report uses the original `02_confusion_matrix.png`.
 
 ## 3. Quick links
 
